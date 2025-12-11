@@ -1,0 +1,7 @@
+Model,Type,Test Acc,Test F1,Test Loss
+GCN,Baseline,0.59,0.519,0.889
+GraphSAGE,Baseline,0.966,0.9625,0.1276
+GAT,Baseline,0.8963,0.8836,0.4333
+R-GCN,Advanced (+20%),0.9919,0.9910,0.0362
+HGT,Advanced (+20%),0.9854,0.9839,0.0933
+Hybrid-GATSAGE,Advanced (+20%),0.9433,0.9391,0.1452

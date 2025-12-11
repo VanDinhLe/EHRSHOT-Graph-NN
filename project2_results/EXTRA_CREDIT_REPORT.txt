@@ -1,0 +1,109 @@
+================================================================================
+EXTRA CREDIT REPORT (+20%)
+Advanced GNN Models for Drug Classification
+================================================================================
+Generated: 2025-12-11 10:37:13
+
+ADVANCED MODELS IMPLEMENTED:
+--------------------------------------------------------------------------------
+
+1. R-GCN (Relational Graph Convolutional Network)
+   - Paper: Schlichtkrull et al. (2018)
+   - Key Feature: Handles multiple edge types in heterogeneous graphs
+   - Architecture: Relational convolution with basis decomposition
+   - Why relevant: Our EHR graph has multiple edge types (visit-drug, visit-disease)
+
+2. HGT (Heterogeneous Graph Transformer)
+   - Paper: Hu et al. (2020)
+   - Key Feature: Attention mechanism for heterogeneous graphs
+   - Architecture: Type-specific attention with multi-head design
+   - Why relevant: Captures complex drug-disease relationships
+
+3. Hybrid GAT-SAGE Model (Custom Design)
+   - Innovation: Combines GAT's attention with SAGE's efficiency
+   - Architecture: Alternating GAT/SAGE layers with skip connections
+   - Why relevant: Balances expressiveness and computational efficiency
+
+================================================================================
+PERFORMANCE COMPARISON
+================================================================================
+
+         Model            Type Test Acc Test F1 Test Loss
+           GCN        Baseline     0.59   0.519     0.889
+     GraphSAGE        Baseline    0.966  0.9625    0.1276
+           GAT        Baseline   0.8963  0.8836    0.4333
+         R-GCN Advanced (+20%)   0.9919  0.9910    0.0362
+           HGT Advanced (+20%)   0.9854  0.9839    0.0933
+Hybrid-GATSAGE Advanced (+20%)   0.9433  0.9391    0.1452
+
+BEST ADVANCED MODEL:
+--------------------------------------------------------------------------------
+Model: R-GCN
+Test Accuracy: 0.9919
+Test F1 Score: 0.9910
+
+================================================================================
+TECHNICAL CONTRIBUTIONS
+================================================================================
+
+1. Heterogeneous Graph Modeling
+   - Directly leverages multiple node and edge types
+   - No information loss from homogeneous conversion
+
+2. Advanced Attention Mechanisms
+   - Type-aware attention in HGT
+   - Multi-head attention for capturing diverse relationships
+
+3. Custom Architecture Design
+   - Hybrid model combines strengths of different architectures
+   - Skip connections improve gradient flow
+
+================================================================================
+DETAILED CLASSIFICATION REPORTS
+================================================================================
+
+R-GCN:
+--------------------------------------------------------------------------------
+                         precision    recall  f1-score   support
+
+Chronic, Broad-Spectrum       1.00      0.99      1.00       205
+   Chronic, Specialized       0.98      1.00      0.99       109
+  Acute, Broad-Spectrum       1.00      0.97      0.99       105
+     Acute, Specialized       0.99      1.00      0.99       198
+
+               accuracy                           0.99       617
+              macro avg       0.99      0.99      0.99       617
+           weighted avg       0.99      0.99      0.99       617
+
+
+HGT:
+--------------------------------------------------------------------------------
+                         precision    recall  f1-score   support
+
+Chronic, Broad-Spectrum       0.99      0.99      0.99       205
+   Chronic, Specialized       0.97      0.99      0.98       109
+  Acute, Broad-Spectrum       0.98      0.97      0.98       105
+     Acute, Specialized       0.99      0.99      0.99       198
+
+               accuracy                           0.99       617
+              macro avg       0.98      0.98      0.98       617
+           weighted avg       0.99      0.99      0.99       617
+
+
+Hybrid-GATSAGE:
+--------------------------------------------------------------------------------
+                         precision    recall  f1-score   support
+
+Chronic, Broad-Spectrum       0.97      0.91      0.94       205
+   Chronic, Specialized       0.87      0.97      0.92       109
+  Acute, Broad-Spectrum       0.92      0.94      0.93       105
+     Acute, Specialized       0.97      0.96      0.97       198
+
+               accuracy                           0.94       617
+              macro avg       0.93      0.95      0.94       617
+           weighted avg       0.95      0.94      0.94       617
+
+
+================================================================================
+END OF REPORT
+================================================================================
