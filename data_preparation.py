@@ -216,6 +216,27 @@ class GNNDataPreparator:
         
         return train_mask, val_mask, test_mask
     
+    def compute_class_weights(self):
+        """
+        计算类别权重以处理不平衡问题
+        
+        Returns:
+            class_weights: torch.Tensor
+        """
+        from sklearn.utils.class_weight import compute_class_weight
+        
+        labels = self.drug_df['label'].values
+        classes = np.unique(labels)
+        
+        weights = compute_class_weight('balanced', classes=classes, y=labels)
+        class_weights = torch.tensor(weights, dtype=torch.float)
+        
+        print(f"\n[Data Prep] Computed class weights:")
+        for i, w in enumerate(class_weights):
+            print(f"  Class {i}: {w:.4f}")
+        
+        return class_weights
+    
     def prepare_full_data(self, feature_type='full'):
         """
         一键准备所有数据
@@ -230,6 +251,9 @@ class GNNDataPreparator:
         
         self.create_node_features(feature_type=feature_type)
         self.create_train_test_split()
+        
+        # 计算类别权重
+        self.class_weights = self.compute_class_weights()
         
         print("\n" + "="*80)
         print("DATA PREPARATION COMPLETE")

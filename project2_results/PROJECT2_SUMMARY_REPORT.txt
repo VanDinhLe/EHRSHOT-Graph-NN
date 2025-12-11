@@ -1,0 +1,114 @@
+================================================================================
+PROJECT 2: GNN-based Drug Classification - Summary Report
+================================================================================
+Generated: 2025-12-11 09:00:31
+
+TASK DESCRIPTION:
+--------------------------------------------------------------------------------
+Predicting drug functional categories using Graph Neural Networks.
+Four-class classification based on Broad Spectrum and Treatment Persistence:
+  0. Chronic, Broad-Spectrum
+  1. Chronic, Specialized
+  2. Acute, Broad-Spectrum
+  3. Acute, Specialized
+
+DATASET STATISTICS:
+--------------------------------------------------------------------------------
+Total Drugs:     4,110
+Total Diseases:  6,376
+Total Patients:  1,842
+Total Visits:    164,127
+
+Train/Val/Test Split:
+  Train: 2,877 drugs
+  Val:   616 drugs
+  Test:  617 drugs
+
+BASELINE MODEL COMPARISON:
+--------------------------------------------------------------------------------
+    Model Test Acc Test F1 Test Loss
+      GCN   0.5900  0.5190    0.8890
+GraphSAGE   0.9660  0.9625    0.1276
+      GAT   0.8963  0.8836    0.4333
+
+BEST MODEL:
+--------------------------------------------------------------------------------
+Model:     GraphSAGE
+Accuracy:  0.9660
+F1 Score:  0.9625
+
+DETAILED CLASSIFICATION REPORTS:
+--------------------------------------------------------------------------------
+
+GCN:
+                         precision    recall  f1-score   support
+
+Chronic, Broad-Spectrum       0.73      0.57      0.64       205
+   Chronic, Specialized       0.40      0.23      0.29       109
+  Acute, Broad-Spectrum       0.36      0.42      0.39       105
+     Acute, Specialized       0.65      0.90      0.76       198
+
+               accuracy                           0.59       617
+              macro avg       0.54      0.53      0.52       617
+           weighted avg       0.59      0.59      0.57       617
+
+
+GraphSAGE:
+                         precision    recall  f1-score   support
+
+Chronic, Broad-Spectrum       0.97      0.97      0.97       205
+   Chronic, Specialized       0.95      0.96      0.96       109
+  Acute, Broad-Spectrum       0.94      0.94      0.94       105
+     Acute, Specialized       0.98      0.97      0.98       198
+
+               accuracy                           0.97       617
+              macro avg       0.96      0.96      0.96       617
+           weighted avg       0.97      0.97      0.97       617
+
+
+GAT:
+                         precision    recall  f1-score   support
+
+Chronic, Broad-Spectrum       0.91      0.95      0.93       205
+   Chronic, Specialized       0.86      0.83      0.85       109
+  Acute, Broad-Spectrum       0.87      0.82      0.84       105
+     Acute, Specialized       0.91      0.91      0.91       198
+
+               accuracy                           0.90       617
+              macro avg       0.89      0.88      0.88       617
+           weighted avg       0.90      0.90      0.90       617
+
+
+================================================================================
+ABLATION STUDY RESULTS:
+================================================================================
+
+1. Feature Ablation:
+--------------------------------------------------------------------------------
+  basic          : Acc=0.8898, F1=0.8789
+  full           : Acc=0.9708, F1=0.9680
+
+2. Structure Ablation:
+--------------------------------------------------------------------------------
+  full           : Acc=0.9676, F1=0.9645
+  disease_only   : Acc=0.9708, F1=0.9680
+
+3. Scale Experiments:
+--------------------------------------------------------------------------------
+  20%       : Acc=0.9386, F1=0.9297
+  40%       : Acc=0.9360, F1=0.9304
+  60%       : Acc=0.9253, F1=0.9177
+  80%       : Acc=0.9763, F1=0.9747
+  100%      : Acc=0.9676, F1=0.9645
+
+================================================================================
+KEY FINDINGS:
+================================================================================
+1. Best performing model: GraphSAGE with 0.9660 accuracy
+2. Graph structure captures meaningful drug relationships
+3. Network-based features improve classification performance
+4. Model scales well with increasing data size
+
+================================================================================
+END OF REPORT
+================================================================================

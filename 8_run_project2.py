@@ -35,7 +35,7 @@ DATA_PATH = "/home/henry/Desktop/LLM/GraphML/data/"
 OUTPUT_DIR = "./project2_results"
 
 # 模型超参数
-HIDDEN_CHANNELS = 64
+HIDDEN_CHANNELS = 32  # 原来64，减半以节省内存
 NUM_LAYERS = 2
 DROPOUT = 0.5
 LEARNING_RATE = 0.01
@@ -119,8 +119,8 @@ def main():
             heads=4 if model_name == 'GAT' else None
         )
         
-        # 训练
-        trainer = GNNTrainer(model)
+        # 训练（使用class weights处理不平衡）
+        trainer = GNNTrainer(model, class_weights=preparator.class_weights)
         history = trainer.fit(
             data,
             train_mask,

@@ -22,9 +22,12 @@ import os
 
 class GNNTrainer:
     """GNN训练器"""
-    def __init__(self, model, device='cuda' if torch.cuda.is_available() else 'cpu'):
+    def __init__(self, model, device='cuda' if torch.cuda.is_available() else 'cpu', class_weights=None):
         self.model = model.to(device)
         self.device = device
+        self.class_weights = class_weights
+        if class_weights is not None:
+            self.class_weights = class_weights.to(device)
         self.history = {
             'train_loss': [],
             'train_acc': [],
@@ -40,7 +43,7 @@ class GNNTrainer:
         
         # Forward
         out = self.model(data.x, data.edge_index)
-        loss = F.cross_entropy(out[mask], data.y[mask])
+        loss = F.cross_entropy(out[mask], data.y[mask], weight=self.class_weights)
         
         # Backward
         loss.backward()
@@ -58,7 +61,7 @@ class GNNTrainer:
         self.model.eval()
         
         out = self.model(data.x, data.edge_index)
-        loss = F.cross_entropy(out[mask], data.y[mask])
+        loss = F.cross_entropy(out[mask], data.y[mask], weight=self.class_weights)
         
         pred = out[mask].argmax(dim=1)
         y_true = data.y[mask].cpu().numpy()

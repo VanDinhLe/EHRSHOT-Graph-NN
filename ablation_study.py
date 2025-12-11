@@ -89,7 +89,7 @@ class AblationStudy:
             
             # 训练
             torch.manual_seed(seed)
-            trainer = self.trainer_class(model)
+            trainer = self.trainer_class(model, class_weights=self.preparator.class_weights)
             trainer.fit(
                 data, 
                 self.preparator.train_mask, 
@@ -184,7 +184,7 @@ class AblationStudy:
             )
             
             torch.manual_seed(seed)
-            trainer = self.trainer_class(model)
+            trainer = self.trainer_class(model, class_weights=self.preparator.class_weights)
             trainer.fit(
                 data,
                 self.preparator.train_mask,
@@ -299,7 +299,7 @@ class AblationStudy:
             )
             
             torch.manual_seed(seed)
-            trainer = self.trainer_class(model)
+            trainer = self.trainer_class(model, class_weights=self.preparator.class_weights)
             trainer.fit(
                 data,
                 train_mask_sub,

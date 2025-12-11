@@ -67,7 +67,8 @@ print("\n[Step 3] Training model...")
 
 from train_evaluate import GNNTrainer
 
-trainer = GNNTrainer(model, device='cuda' if torch.cuda.is_available() else 'cpu')
+trainer = GNNTrainer(model, device='cuda' if torch.cuda.is_available() else 'cpu', 
+                     class_weights=preparator.class_weights)
 
 # 训练（使用较少的epochs进行快速演示）
 history = trainer.fit(
@@ -147,7 +148,7 @@ def compare_multiple_models_example():
             out_channels=4
         )
         
-        trainer = GNNTrainer(model)
+        trainer = GNNTrainer(model, class_weights=preparator.class_weights)
         trainer.fit(data, train_mask, val_mask, epochs=30, verbose=False)
         test_results = trainer.test(data, test_mask, preparator.label_names)
         
