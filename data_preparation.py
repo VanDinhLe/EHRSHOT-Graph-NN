@@ -252,7 +252,7 @@ class GNNDataPreparator:
         self.create_node_features(feature_type=feature_type)
         self.create_train_test_split()
         
-        # 计算类别权重
+        # type weights
         self.class_weights = self.compute_class_weights()
         
         print("\n" + "="*80)
@@ -264,7 +264,7 @@ class GNNDataPreparator:
         return self.hetero_data, self.train_mask, self.val_mask, self.test_mask
 
 
-# ==================== 测试 ====================
+# ==================== test ====================
 if __name__ == "__main__":
     from graph_builder import build_ehrshot_graph
     
